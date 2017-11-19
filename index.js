@@ -19,7 +19,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+app.get("/", (req, res) => {
+  res.send("test index");
+});
 
 require("./routes/authRoutes")(app); //idk if i like this, require returns module.exports. in this case a function
 

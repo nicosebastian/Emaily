@@ -20,9 +20,10 @@ passport.deserializeUser((id, done) => {
 passport.use(
   new GoogleStrategy(
     {
-      clientID: keys.googleClientID,
-      clientSecret: keys.googleClientSecret,
-      callbackURL: "/auth/google/callback"
+      clientID: keys.googleClientID,//ID for google service
+      clientSecret: keys.googleClientSecret,//password for google service
+      callbackURL: "/auth/google/callback"//url to verify transaction, this must match callback in api config at console.developer.google.com
+      //proxy: true//allows proxies, could be avoided by putting specific domain on callbackURL
     },
     (accessToken, refreshToken, profile, done) => {
       User.findOne({ googleId: profile.id }).then(existingUser => {
