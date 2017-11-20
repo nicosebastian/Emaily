@@ -25,17 +25,15 @@ passport.use(
       callbackURL: "/auth/google/callback", //url to verify transaction, this must match callback in api config at console.developer.google.com
       proxy: true //allows proxies, could be avoided by putting specific domain on callbackURL
     },
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ googleId: profile.id }).then(existingUser => {
-        if (existingUser) {
-          //he exists!
-          done(null, existingUser); //why?
-        } else {
-          new User({ googleId: profile.id })
-            .save()
-            .then(user => done(null, user));
-        }
-      });
+    async (accessToken, refreshToken, profile, done) => {
+      const existingUser = await User.findOne({ googleId: profile.id });
+
+      if (existingUser) {
+        return done(null, existingUser); //he exists!//not sure what done() is for
+      }
+
+      const newUser = await new User({ googleId: profile.id }).save();
+      done(null, newUser);
     }
   )
 );
