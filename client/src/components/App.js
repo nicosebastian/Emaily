@@ -8,8 +8,8 @@ import * as actions from '../actions'
 import 'materialize-css/dist/css/materialize.min.css'; //unessecery to assign to var
 
 import Header from "./Header";
+import Landing from "./Landing";
 
-const Landing = () => <h2>Landing</h2>;
 const Dashboard = () => <h2>Dashboard</h2>;
 const NewSurvey = () => <h2>NewSurvey</h2>;
 
