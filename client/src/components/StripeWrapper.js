@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import ReactStripeCheckout from "react-stripe-checkout";
+import { connect } from "react-redux";
+
+import * as actions from "../actions"
 
 class StripeWrapper extends Component {
   render() {
@@ -8,7 +11,7 @@ class StripeWrapper extends Component {
         name="Emaily"
         description="$5 for 5 email credits"
         amount={500} //in US cents
-        token={token => console.log(token)} //callback when token is receaved from stripe server //think onToken
+        token={token => this.props.handleStripeToken(token)} //callback when token is receaved from stripe server //think onToken go to action
         stripeKey={process.env.REACT_APP_STRIPE_PUBKEY}
       >
         <button className="btn">Add Credits</button>
@@ -17,4 +20,4 @@ class StripeWrapper extends Component {
   }
 }
 
-export default StripeWrapper;
+export default connect(null, actions)(StripeWrapper);
