@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import StripeWrapper from "./StripeWrapper";
 
 class Header extends Component {
-
   //helper meathod to choose if login nav should be shown
   renderContent() {
     switch (this.props.auth) {
@@ -22,10 +21,17 @@ class Header extends Component {
 
       //logged in
       default:
-        return ([
-          <li><StripeWrapper /></li>,
-          <li><a href="/api/logout">Logout</a></li>
-        ]);
+        return [
+          <li key="1">
+            <StripeWrapper />
+          </li>,
+          <li key="2" style={{ margin: "0 10px" }}>
+            Credits: {this.props.auth.credits}
+          </li>, //this.props.auth is like user
+          <li key="3">
+            <a href="/api/logout">Logout</a>
+          </li>
+        ];
     }
   }
 
