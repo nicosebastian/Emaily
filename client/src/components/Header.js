@@ -1,29 +1,31 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import StripeWrapper from "./StripeWrapper";
+
 class Header extends Component {
+
   //helper meathod to choose if login nav should be shown
   renderContent() {
     switch (this.props.auth) {
+      //waiting for request to be resolved
       case null:
-        //waiting for request to be resolved
         return;
 
+      //logged out
       case false:
-        //logged out
         return (
           <li>
             <a href="/auth/google">Login With Google</a>
           </li>
         );
 
+      //logged in
       default:
-        //logged in
-        return (
-          <li>
-            <a href="/api/logout">Logout</a>
-          </li>
-        );
+        return ([
+          <li><StripeWrapper /></li>,
+          <li><a href="/api/logout">Logout</a></li>
+        ]);
     }
   }
 
